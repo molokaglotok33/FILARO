@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from backend.app.api.router import router
+from app.api.router import router
 
 app = FastAPI(
     title="FILARO API",
