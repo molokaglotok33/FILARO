@@ -43,5 +43,22 @@ services:
       --host 0.0.0.0
       --port 8000
 
+  bot:
+    build:
+      context: ./bot
+
+    container_name: filaro-bot
+
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+
+    env_file:
+      - .env
+
+    environment:
+      BACKEND_URL: http://backend:8000/api/v1
+
 volumes:
   postgres_data:
