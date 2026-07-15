@@ -15,9 +15,13 @@ from app.models.user import User
 
 config = context.config
 
+from app.core.config import settings
+
+config = context.config
+
 config.set_main_option(
     "sqlalchemy.url",
-    "postgresql+psycopg://filaro:filaro@postgres:5432/filaro",
+    settings.DATABASE_URL,
 )
 
 # Interpret the config file for Python logging.

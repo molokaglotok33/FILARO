@@ -27,6 +27,3 @@ async def root():
         "status": "online",
         "message": "Welcome to FILARO API 🚀",
     }
-    from sqlalchemy import text
-
-from app.db.database import engine
