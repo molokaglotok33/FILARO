@@ -2,28 +2,27 @@ import asyncio
 import os
 
 from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart
-from aiogram.types import Message
 from dotenv import load_dotenv
-from keyboards.main_menu import main_menu
+
 from handlers.menu import router as menu_router
+from handlers.start import router as start_router
+
 
 load_dotenv()
 
 TOKEN = os.getenv("BOT_TOKEN")
 
+if not TOKEN:
+    raise ValueError("BOT_TOKEN is not set")
+
+
 bot = Bot(token=TOKEN)
+
 dp = Dispatcher()
+
+# Подключаем обработчики
+dp.include_router(start_router)
 dp.include_router(menu_router)
-
-
-@dp.message(CommandStart())
-async def start(message: Message):
-    await message.answer(
-        "🚀 Добро пожаловать в FILARO!\n\n"
-        "Выберите действие 👇",
-        reply_markup=main_menu,
-    )
 
 
 async def main():
