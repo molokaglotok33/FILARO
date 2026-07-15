@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 
+from backend.app.api.router import router
+
 app = FastAPI(
     title="FILARO API",
     description="Backend API for FILARO VPN SaaS",
     version="1.0.0",
 )
+
+app.include_router(router)
 
 
 @app.get("/")
@@ -13,11 +17,4 @@ async def root():
         "project": "FILARO",
         "status": "online",
         "message": "Welcome to FILARO API 🚀",
-    }
-
-
-@app.get("/health")
-async def health():
-    return {
-        "status": "healthy"
     }
