@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from sqlalchemy import text
 
 from app.api.router import router
+from app.db.database import engine
 
 app = FastAPI(
     title="FILARO API",
@@ -10,7 +12,14 @@ app = FastAPI(
 
 app.include_router(router)
 
+@app.on_event("startup")
+async def startup():
 
+    with engine.connect() as connection:
+        connection.execute(text("SELECT 1"))
+
+    print("✅ PostgreSQL connected")
+    
 @app.get("/")
 async def root():
     return {
@@ -18,3 +27,6 @@ async def root():
         "status": "online",
         "message": "Welcome to FILARO API 🚀",
     }
+    from sqlalchemy import text
+
+from app.db.database import engine

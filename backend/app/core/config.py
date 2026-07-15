@@ -2,12 +2,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "FILARO"
-    API_VERSION: str = "v1"
+    DATABASE_URL: str = "postgresql+psycopg://filaro:filaro@postgres:5432/filaro"
 
     model_config = SettingsConfigDict(
         env_file=".env",
-        case_sensitive=True,
+        extra="ignore",
     )
 
 
